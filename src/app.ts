@@ -8,7 +8,6 @@ import { stream as morganStream } from './lib/logger/logger';
 import routes from './routes';
 import { swaggerOptions } from './config/swagger';
 import { errorHandler } from './middlewares/error.middleware';
-import healthRoutes from './routes/health.routes';
 
 export class App {
     public static async init() {
@@ -17,6 +16,7 @@ export class App {
         app.use(cors());
         app.use(express.json({ limit: '10mb' }));
         app.use(express.urlencoded({ extended: true }));
+        app.use(errorHandler);
 
         // morgan -> winston
         app.use(morgan('combined', { stream: morganStream }));
@@ -27,8 +27,6 @@ export class App {
 
         // routes
         app.use('/api', routes);
-
-        app.use('/health', healthRoutes);
 
         // error handler
         app.use(errorHandler);

@@ -15,10 +15,20 @@ async function start() {
         await sequelize_1.sequelize.authenticate();
         logger_1.logger.info('Database connected');
         const app = await app_1.App.init();
-        app.listen(PORT, () => {
+        const server = app.listen(PORT, () => {
             logger_1.logger.info(`Server started on port ${PORT}`);
             logger_1.logger.info(`Swagger UI: http://localhost:${PORT}/api/docs`);
         });
+        const shutdown = async (signal) => {
+            logger_1.logger.info(`${signal} received. Closing gracefully...`);
+            server.close(async () => {
+                await sequelize_1.sequelize.close();
+                logger_1.logger.info('Database connection closed gracefully.');
+                process.exit(0);
+            });
+        };
+        process.on('SIGTERM', () => shutdown('SIGTERM'));
+        process.on('SIGINT', () => shutdown('SIGINT'));
     }
     catch (err) {
         const error = err instanceof Error ? err : new Error(String(err));

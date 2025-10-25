@@ -6,6 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const health_routes_1 = __importDefault(require("./health.routes"));
 const router = (0, express_1.Router)();
-// ✅ this becomes /api/health
 router.use('/health', health_routes_1.default);
 exports.default = router;
