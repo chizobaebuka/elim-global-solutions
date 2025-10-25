@@ -1,18 +1,24 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { logger } from '../lib/logger/logger';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function errorHandler(
-    err: Error & { status?: number; stack?: string },
+export const errorHandler = (
+    err: any,
     req: Request,
     res: Response,
-) {
-    const status = err.status ?? 500;
-    const message = err.message || 'Internal Server Error';
-    logger.error(`${req.method} ${req.originalUrl} - ${message}`);
-    if (process.env.NODE_ENV === 'production') {
-        res.status(status).json({ status: 'error', message });
-    } else {
-        res.status(status).json({ status: 'error', message, stack: err.stack });
+    next: NextFunction
+): void => {
+    logger.error(`${req.method} ${req.url} - ${err.message}`);
+
+    if (!res || typeof res.status !== 'function') {
+        console.error('Invalid response object in error handler');
+        return;
     }
-}
+
+    const statusCode = err.status || 500;
+    const message = err.message || 'Internal Server Error';
+
+    res.status(statusCode).json({
+        status: 'error',
+        message,
+    });
+};

@@ -14,7 +14,6 @@ const logger_1 = require("./lib/logger/logger");
 const routes_1 = __importDefault(require("./routes"));
 const swagger_1 = require("./config/swagger");
 const error_middleware_1 = require("./middlewares/error.middleware");
-const health_routes_1 = __importDefault(require("./routes/health.routes"));
 class App {
     static async init() {
         const app = (0, express_1.default)();
@@ -29,7 +28,6 @@ class App {
         app.use('/api/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerSpec));
         // routes
         app.use('/api', routes_1.default);
-        app.use('/health', health_routes_1.default);
         // error handler
         app.use(error_middleware_1.errorHandler);
         return app;

@@ -5,18 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "lint": "eslint 'src/**/*.{ts,js}' --quiet",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "db:create": "npx sequelize-cli db:create",
     "db:drop": "npx sequelize-cli db:drop",
+    "db:sync": "ts-node src/lib/db/sync-db.ts",
     "migrate": "npx sequelize-cli db:migrate",
-    "migrate:auto": "ts-node src/lib/db/generate-migration.ts",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "migrate:undo:all": "sequelize-cli db:migrate:undo:all",
+    "migrate:generate": "npx sequelize-cli migration:generate --name",
+    "model:generate": "npx sequelize-cli model:generate --name",
     "seed": "npx sequelize-cli db:seed:all",
-    "seed:undo": "npx sequelize-cli db:seed:undo:all",
-    "migration:generate": "npx sequelize-cli migration:generate --name",
-    "model:generate": "npx sequelize-cli model:generate --name"
+    "seed:undo": "npx sequelize-cli db:seed:undo:all"
   },
   "repository": {
     "type": "git",
@@ -50,6 +50,7 @@
     "streamifier": "^0.1.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "uuid": "^9.0.1",
     "winston": "^3.18.3"
   },
   "devDependencies": {
@@ -66,7 +67,6 @@
     "eslint": "^9.38.0",
     "globals": "^16.4.0",
     "prettier": "^3.6.2",
-    "sequelize-auto-migrations": "^1.0.3",
     "sequelize-cli": "^6.6.3",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
