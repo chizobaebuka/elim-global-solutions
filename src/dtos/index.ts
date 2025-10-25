@@ -36,3 +36,18 @@ export interface IEmployeeQueryDTO {
     limit?: number;
     page?: number;
 }
+
+export interface ICategoryCreateDTO {
+    name: string;
+    description?: string;
+}
+
+export interface ICategoryUpdateDTO {
+    name?: string;
+    description?: string;
+}
+
+export interface ICategoryQueryDTO {
+    limit?: number;
+    page?: number;
+}
