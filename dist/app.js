@@ -21,6 +21,7 @@ class App {
         app.use((0, cors_1.default)());
         app.use(express_1.default.json({ limit: '10mb' }));
         app.use(express_1.default.urlencoded({ extended: true }));
+        app.use(error_middleware_1.errorHandler);
         // morgan -> winston
         app.use((0, morgan_1.default)('combined', { stream: logger_1.stream }));
         // swagger

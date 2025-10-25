@@ -5,6 +5,7 @@ import CategoryModel from './category.model';
 import JobModel from './job.model';
 import InventoryItemModel from './inventoryItem.model';
 import JobInventoryModel from './jobInventory.model';
+import userModel from './user.model';
 
 // Initialize models
 const Equipment = EquipmentModel(sequelize);
@@ -13,6 +14,7 @@ const Category = CategoryModel(sequelize);
 const Job = JobModel(sequelize);
 const InventoryItem = InventoryItemModel(sequelize);
 const JobInventory = JobInventoryModel(sequelize);
+const User = userModel(sequelize);
 
 // Associations
 Category.hasMany(Equipment, { foreignKey: 'category_id', as: 'equipment' });
@@ -40,6 +42,7 @@ InventoryItem.belongsToMany(Job, {
 
 export {
     sequelize,
+    User,
     Equipment,
     Employee,
     Category,
