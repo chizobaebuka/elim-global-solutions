@@ -17,9 +17,10 @@ async function start() {
             logger.info(`Server started on port ${PORT}`);
             logger.info(`Swagger UI: http://localhost:${PORT}/api/docs`);
         });
-    } catch (err: any) {
-        logger.error('Failed to start: ' + (err && err.message ? err.message : String(err)));
-        if (err && err.stack) logger.error(err.stack);
+    } catch (err: unknown) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        logger.error('Failed to start: ' + error.message);
+        logger.error(error.stack ?? '');
         process.exit(1);
     }
 }

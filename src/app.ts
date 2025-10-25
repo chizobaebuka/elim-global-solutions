@@ -4,10 +4,11 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import { logger, stream as morganStream } from './lib/logger/logger';
+import { stream as morganStream } from './lib/logger/logger';
 import routes from './routes';
 import { swaggerOptions } from './config/swagger';
 import { errorHandler } from './middlewares/error.middleware';
+import healthRoutes from './routes/health.routes';
 
 export class App {
     public static async init() {
@@ -26,6 +27,8 @@ export class App {
 
         // routes
         app.use('/api', routes);
+
+        app.use('/health', healthRoutes);
 
         // error handler
         app.use(errorHandler);
