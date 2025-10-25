@@ -62,7 +62,7 @@ router.get('/users', authenticate, authorize('admin'), AuthController.getAll);
 
 /**
  * @swagger
- * /api/auth/users/{id}:
+ * /api/auth/user/{id}:
  *   get:
  *     summary: Get a single user by ID
  *     tags: [Auth]
@@ -85,7 +85,7 @@ router.get('/user/:id', authenticate, authorize('admin', 'user'), validate(userI
 
 /**
  * @swagger
- * /api/auth/users/{id}:
+ * /api/auth/user/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [Auth]
@@ -112,7 +112,7 @@ router.put('/user/:id', authenticate, authorize('admin', 'user'), validate(updat
 
 /**
  * @swagger
- * /api/auth/users/{id}:
+ * /api/auth/user/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Auth]

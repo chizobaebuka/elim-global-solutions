@@ -30,6 +30,10 @@ export class EmployeeController {
         const deleted = await EmployeeService.delete(req.params.id);
         if (!deleted) return res.status(404).json({ status: 'fail', message: 'Employee not found' });
 
-        res.status(204).send();
+        res.status(204).json({
+            status: 'success',
+            message: 'Employee deleted successfully',
+            data: null
+        });
     }
 }
