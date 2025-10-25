@@ -21,9 +21,9 @@ async function start() {
         });
     }
     catch (err) {
-        logger_1.logger.error('Failed to start: ' + (err && err.message ? err.message : String(err)));
-        if (err && err.stack)
-            logger_1.logger.error(err.stack);
+        const error = err instanceof Error ? err : new Error(String(err));
+        logger_1.logger.error('Failed to start: ' + error.message);
+        logger_1.logger.error(error.stack ?? '');
         process.exit(1);
     }
 }

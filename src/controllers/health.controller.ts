@@ -15,6 +15,9 @@ export const health = async (req: Request, res: Response) => {
     } catch (error) {
         response.status = 'error';
         response.database = 'disconnected';
-        res.status(500).json(response);
+        res.status(500).json({
+            status: 'error',
+            message: `Database connection error, ${error}`,
+        });
     }
 };
