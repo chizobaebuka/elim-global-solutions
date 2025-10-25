@@ -59,7 +59,7 @@ router.post('/login', (0, validation_middleware_1.validate)(user_validator_1.log
 router.get('/users', auth_middleware_1.authenticate, (0, auth_middleware_1.authorize)('admin'), auth_controller_1.AuthController.getAll);
 /**
  * @swagger
- * /api/auth/users/{id}:
+ * /api/auth/user/{id}:
  *   get:
  *     summary: Get a single user by ID
  *     tags: [Auth]
@@ -81,7 +81,7 @@ router.get('/users', auth_middleware_1.authenticate, (0, auth_middleware_1.autho
 router.get('/user/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.authorize)('admin', 'user'), (0, validation_middleware_1.validate)(user_validator_1.userIdParamSchema, 'params'), auth_controller_1.AuthController.getById);
 /**
  * @swagger
- * /api/auth/users/{id}:
+ * /api/auth/user/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [Auth]
@@ -107,7 +107,7 @@ router.get('/user/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.au
 router.put('/user/:id', auth_middleware_1.authenticate, (0, auth_middleware_1.authorize)('admin', 'user'), (0, validation_middleware_1.validate)(user_validator_1.updateUserSchema, 'body'), auth_controller_1.AuthController.update);
 /**
  * @swagger
- * /api/auth/users/{id}:
+ * /api/auth/user/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Auth]

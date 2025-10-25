@@ -9,6 +9,7 @@ const authenticate = (req, res, next) => {
             return res.status(401).json({ message: 'Unauthorized' });
         const token = authHeader.split(' ')[1];
         const decoded = Helper_1.Helper.verifyToken(token);
+        console.log('Decoded token:', decoded);
         req.user = decoded;
         next();
     }
